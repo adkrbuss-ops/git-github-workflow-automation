@@ -29,6 +29,19 @@ class TaskManagerTests(unittest.TestCase):
         with self.assertRaises(IndexError):
             complete_task(0)
 
+    def test_task_has_creation_date(self):
+        task = add_task("Learn Python")
+        self.assertIsNotNone(task["created_at"])
+        self.assertIsNone(task["completed_at"])
+
+
+    def test_completion_date_is_recorded(self):
+        add_task("Learn Git")
+        task = complete_task(0)
+
+        self.assertTrue(task["completed"])
+        self.assertIsNotNone(task["completed_at"])
+
 
 if __name__ == "__main__":
     unittest.main()
